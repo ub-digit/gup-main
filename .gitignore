@@ -5,10 +5,6 @@
 #   git config --global core.excludesfile '~/.gitignore_global'
 
 
-/guppi
-/gup-items
-/gup-people
-/gup
 
 # Ignore bundler config.
 /.bundle

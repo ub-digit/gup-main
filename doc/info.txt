@@ -1,0 +1,91 @@
+# --------------------------------- #
+# /home/xrasto/Dropbox/Arkiv/Kladdar/
+# dig000_kladd_0224.txt
+# 2015-03-12 12:37:09
+# --------------------------------- #
+
+
+     test            demo           live
+                                            
+ +----------+    +----------+   +----------+
+ |          |    |          |   |          |
+ |  main    |    |  main    |   |  main    |
+ |          |    |          |   |          |
+ +----------+    +----------+   +----------+
+ +----------+    +----------+   +----------+
+ |          |    |          |   |          |
+ |  items   |    |  items   |   |  items   |
+ |          |    |          |   |          |
+ +----------+    +----------+   +----------+
+ +----------+    +----------+   +----------+
+ |          |    |          |   |          |
+ |  people  |    |  people  |   |  people  |
+ |          |    |          |   |          |
+ +----------+    +----------+   +----------+
+ +----------+    +----------+   +----------+
+ |          |    |          |   |          |
+ |  guppi   |    |  guppi   |   |  guppi   |
+ |          |    |          |   |          |
+ +----------+    +----------+   +----------+
+ +----------+    +----------+   +----------+
+ |          |    |          |   |          |
+ |   GUP    |    |   GUP    |   |   GUP    |
+ |          |    |          |   |          |
+ +----------+    +----------+   +----------+
+
+
+ Jag vill driftsätta gup.
+
+ Skall det vara integration, live, demo, test eller lokalt  (DEPTYPE)
+ Skall det vara initiering, reset eller uppdatering         (ACTION)
+   * Reset är en ren databasgrej: man nollställer databasen som vid init
+     (men alltså utan att påverka applikationen i övrigt)
+   * init är att skapa en ny databas utifrån de script som appen
+     innehåller (rake db:create, rake db:schema:load, rake:db:seed)
+     och att installera och konfigurera appen.
+   * update uppdatera databasen utifrån de migreringar appen
+     innehåller (rake db:migrate),
+     och att installera (pull) (och ev omkonfigurera) appen.
+
+
+ make gup live
+   * init (men även skydd mot att göra det "i onödan")
+   * reset inte aktuell (skydd mot att göra det)
+   * update : normal
+ make gup test
+   * init 
+   * reset 
+   * update
+ make gup demo
+   * init 
+   * reset 
+   * update
+ make gup local
+   * init
+       för varje railsarkiv:
+         klona, 
+         redigera inställningar.sample, 
+         bundle install,
+         rake:db:setup
+         rails s -p {PORT}
+   * reset 
+       för varje railsarkiv:
+         rake db:clean, rake db:setup 
+   * update
+       för varje railsarkiv:
+         git pull
+         bundle install
+         rake db:migrate
+         rails s -p{PORT}
+       för GUI:
+         git pull
+         npm install
+         bower install
+         ember s -p{PORT}
+
+ 
+ 
+# -------------------------------------------------- #
+ make gup integration
+   * i detta fall är ACTION överflödig.
+   * integration är ett test, man sätter upp rapporterar och tar ner

@@ -47,11 +47,18 @@
      innehåller (rake db:migrate),
      och att installera (pull) (och ev omkonfigurera) appen.
 
++--------------+-------+------------+-----------+-------+
+| {RAILSARKIV} | guppi | gup-people | gup-items | gup   |
++--------------+-------+------------+-----------+-------+
+| PORTS        |  4010 |  4011      |  4012     | 4013  |
++--------------+-------+------------+-----------+-------+
+
 
  make gup live
    * init (men även skydd mot att göra det "i onödan")
    * reset inte aktuell (skydd mot att göra det)
    * update : normal
+# -------------------------------------------------- #
  make gup test
    * init 
    * reset 
@@ -60,29 +67,66 @@
    * init 
    * reset 
    * update
- make gup local
+# -------------------------------------------------- #
+ make gup local/*{{{*/
+# -------------------------------------------------- #
    * init
-       för varje railsarkiv:
-         klona, 
+       för varje {RAILSARKIV}:
+	     cd ..
+         klona {RAILSARKIV}:, 
+	     cd  {RAILSARKIV}:
          redigera inställningar.sample, 
+		 Om .ruby.version: cd ..;cd {RAILSARKIV}:
          bundle install,
          rake:db:setup
+		 check ports (and kill?)
          rails s -p {PORT}
-   * reset 
-       för varje railsarkiv:
-         rake db:clean, rake db:setup 
-   * update
-       för varje railsarkiv:
-         git pull
-         bundle install
-         rake db:migrate
-         rails s -p{PORT}
+		 "kolla att det funkar"
+	     cd  ../{MAIN}:
        för GUI:
-         git pull
+	     cd ..
+         klona {RAILSARKIV}:, 
+	     cd  {GUIKAT}:
+         INPUT: redigera inställningar.sample, 
          npm install
          bower install
-         ember s -p{PORT}
-
+		 check ports (and kill?)
+         ember serve -p{PORT}
+		 "kolla att det funkar"
+	     cd  ../{MAIN}:
+     "kolla att allt funkar"/*}}}*/
+# -------------------------------------------------- #
+   * reset 
+       för varje {RAILSARKIV}:
+	     cd  ../{RAILSARKIV}:
+         rake db:clean, rake db:setup 
+		 "kolla att det funkar"
+	     cd  ../{MAIN}:
+	"kolla att allt funkar"
+# -------------------------------------------------- #
+   * update
+       för varje {RAILSARKIV}:
+	     cd  ../{RAILSARKIV}:
+         git pull
+         INPUT: are you sure you've edited config files? (Y/N)
+         bundle install
+         rake db:migrate
+		 check ports (and kill?)
+         rails s -p{PORT}
+		 "kolla att det funkar"
+	     cd  ../{MAIN}:
+       för GUI:
+	     cd  ../{GUIKAT}:
+         git pull
+         INPUT: are you sure you've edited config files? (Y/N)
+         npm install
+         bower install
+		 check ports (and kill?)
+         ember serve -p{PORT}
+		 "kolla att det funkar"
+	     cd  ../{MAIN}:
+# -------------------------------------------------- #
+ * start
  
  
 # -------------------------------------------------- #

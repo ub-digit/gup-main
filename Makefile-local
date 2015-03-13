@@ -19,7 +19,28 @@ update-gup-people:
 	bash --login ./update.sh $@ ${PORT_GUP_PEOPLE}
 
 update-gup-items:
+	bash --login ./update.sh $@ ${PORT_GUP_ITEMS}
 
 update-guppi:
+	bash --login ./update.sh $@ ${PORT_GUPPI}
 
 update-gup:
+	bash --login ./update.sh $@ ${PORT_GUP}
+
+
+init-gup-people:
+
+init-gup-items:
+
+init-guppi:
+
+init-gup:
+
+reset-gup-people:
+
+reset-gup-items:
+
+reset-guppi:
+
+reset-gup:
+
